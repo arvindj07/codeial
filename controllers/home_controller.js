@@ -1,3 +1,5 @@
+// for every action in the controller u have to setup the route, controllers are collections of actions
+
 module.exports.home = function(req,res){
   return res.end('<h1> Express is up for Codeial</h1>');
 }

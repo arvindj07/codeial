@@ -1,0 +1,17 @@
+{
+  "name": "codeial",
+  "version": "1.0.0",
+  "description": "Social Media Web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Arvind",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

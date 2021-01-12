@@ -7,7 +7,8 @@ const port=8000;
 app.use('/',require('./routes'));  // can also give path as - require('./routes/index') , but it by default takes index   file only, as the name of this file(entry file) nd route file is same
 
 
-// set up the view engine
+// Here we Setup the View i.e., The Html/Ejs pages
+// set up the view engine and the views
 app.set('view engine','ejs');  //app.set(name,value) here using set() we set the values in the 'app' object
 app.set('views','./views');
 

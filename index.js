@@ -3,6 +3,9 @@ const app=express();
 const port=8000;
 const expressLayouts = require('express-ejs-layouts');
 
+// To SETUP the ASSETS folder for CSS and other files, so that the view files can access them through root folder ASSETS
+app.use(express.static('./assets'));
+
 // used to SETUP the LAYOUT that is used in Views
 // its placed before setting-up the views and view-engine coz the layoutis to be set before as when it reaches views, the layout should be already set
 app.use(expressLayouts);

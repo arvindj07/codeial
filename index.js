@@ -1,6 +1,11 @@
 const express=require('express');
 const app=express();
 const port=8000;
+const expressLayouts = require('express-ejs-layouts');
+
+// used to SETUP the LAYOUT that is used in Views
+// its placed before setting-up the views and view-engine coz the layoutis to be set before as when it reaches views, the layout should be already set
+app.use(expressLayouts);
 
 // This is where the route (folder) is setup  using middleware
 //use express router

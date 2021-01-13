@@ -13,5 +13,7 @@ router.get('/sign-in',usersController.signIn);
 // ussing sign-up form, create user into User collection after successful sign-up
 router.post('/create',usersController.create);
 
+router.post('/create-session',usersController.createSession);
+
 
 module.exports = router;

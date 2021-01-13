@@ -9,8 +9,8 @@ const db = require('./config/mongoose');
 // To SETUP the ASSETS folder for CSS and other files, so that the view files can access them through root folder ASSETS
 app.use(express.static('./assets'));
 
-// used to SETUP the LAYOUT that is used in Views
-// its placed before setting-up the views and view-engine coz the layoutis to be set before as when it reaches views, the layout should be already set
+// used to SETUP the LAYOUT that is used in Views, the filename is layout which is default names
+// its placed before setting-up the views and view-engine coz the layout is to be set before as when it reaches views, the layout should be already set
 app.use(expressLayouts);
 
 //  extract STYLES and SCRIPTS from sub pages into the LAYOUT by SETTING the values in app object

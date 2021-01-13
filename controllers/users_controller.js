@@ -2,9 +2,28 @@ const User = require('../models/user');
 
 // render the profile page
 module.exports.profile = function(req,res){
-  return res.render('user_profile',{
-    title: 'Profile'
-  });
+
+  // check whether the cookie is set ,i.e., check for sign-in authentication to access profile page, otherwise revert back to sign-in page
+  if(req.cookies.user_id){
+
+    User.findById(req.cookies.user_id,function(err,user){
+      
+      //if user is found
+      if(user){
+        return res.render('user_profile',{
+          title: 'User Profile',
+          user: user
+        });
+      
+      }else{
+        return res.redirect('/users/sign-in');
+      }  
+    });
+
+  }else{  //revert back to sign-in page, as not authorized
+    return res.redirect('/users/sign-in');
+  }
+  
 };
 
 

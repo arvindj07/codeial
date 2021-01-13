@@ -1,9 +1,15 @@
 const express=require('express');
+const cookieParser = require('cookie-parser');
 const app=express();
 const port=8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 
+//middleware to read the data passed by the forms using req.body ,method-POST
+app.use(express.urlencoded());
+
+//using cookie-parser
+app.use(cookieParser());
 
 
 // To SETUP the ASSETS folder for CSS and other files, so that the view files can access them through root folder ASSETS

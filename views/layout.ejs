@@ -3,7 +3,12 @@
     <title>
       <%= title %>
     </title>
-    <link rel="stylesheet" href="/css/layout.css">
+
+    <!-- here the css is coming from root folder ASSETS as setup in the index.js file at entry point -->
+    <link rel="stylesheet" href="/css/layout.css"> 
+    
+    <!-- used to extract Styles from sub pages i.e, partials  -->
+    <%- style %>
   </head>
   <body>
 
@@ -13,5 +18,8 @@
     <%- body %>
 
     <%- include('_footer') %>
+
+    <!-- used to extract Scripts(js) from sub pages i.e, partials  -->  
+    <%- script %>
   </body>
 </html>

@@ -19,3 +19,12 @@ module.exports.signIn = function(req,res){
   });
 };
 
+// get the sign-up data
+module.exports.create = function(req,res){
+  // To do
+}
+
+// sign and create a session for the user
+module.exports.createSession = function(req,res){
+  // To Do
+}

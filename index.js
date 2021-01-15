@@ -4,11 +4,13 @@ const app=express();
 const port=8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
-
 // used for Session cookie
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+// this lib is used to store the session cookie in a persistence storage(i.e, DB),as otherwise the cookie is erased after each server restart
+const MongoStore = require('connect-mongo')(session);  //unlike other lib, it requires an argument,i.e., 
+                                          //the session( express-session), as we have to store the session info in the DB
 
 //middleware to read the data passed by the forms using req.body ,method-POST
 app.use(express.urlencoded());
@@ -34,6 +36,7 @@ app.set('view engine','ejs');  //app.set(name,value) here using set() we set the
 app.set('views','./views');
 
 // middleware used to encrypt the cookie(session cookie)
+// MongoStore is used to store the session cookie in DB
 app.use(session({
   name: 'codeial',                // name of the session-cookie
   // TODO change secret before deployment in production mode
@@ -42,7 +45,16 @@ app.use(session({
   resave: false,                  //not to save the user data again and again
   cookie:{
     maxAge:(1000*60*100)          // the amount of time this cookie should be stored in ms, after that session-time-out
-  }
+  },
+  store:new MongoStore(           // storing session cookie in DB
+    {
+    mongooseConnection: db,       // DB connection
+    autoRemove: 'disabled'
+    },
+    function(err){
+      console.log(err || 'connect-mongodb setup');   // if err display err ,else display the text within ''
+    }
+  )
 }));
 
 //middleware to use passport, and passport also controls the session

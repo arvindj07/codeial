@@ -1,5 +1,10 @@
 const User = require('../models/user');
 
+// the problem in manual authentication is that there r many loop holes, like here we r not able to restrict the access of sign-in or sign-up page once the user is signed-in, as these pgs shouldnt be visible once signed-in
+// to rectify this we have set-up checks at action lvl within the controller, like if(req.cookies.user_id) condition in profile-page rendering
+
+//we can solve this problem at router lvl with less redundancy of code, nd for this we use PASSPORT.JS
+
 // render the profile page
 module.exports.profile = function(req,res){
 
@@ -96,6 +101,7 @@ module.exports.createSession = function(req,res){
       }
 
       //handle session creation
+      //setup cookies for checking the authenticity
       res.cookie('user_id',user.id);
       return res.redirect('/users/profile');
 
@@ -106,11 +112,16 @@ module.exports.createSession = function(req,res){
     }   
 
   });
+}
 
-  
 
-  
+// Sign-Out the profile page and Reset the Cookie
+module.exports.signOut = function(req,res){
 
-  
+  //Reseting the cookie to empty string
+  // res.cookie('user_id','');
 
+  //Or Delete th Cookie
+  res.clearCookie('user_id');
+  return  res.redirect('/users/sign-in');
 }

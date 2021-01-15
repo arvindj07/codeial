@@ -10,6 +10,9 @@ router.get('/profile',usersController.profile);
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 
+// Sign-out action,  redirect to sign-in pg after Sign-out
+router.get('/sign-out',usersController.signOut);
+
 // ussing sign-up form, create user into User collection after successful sign-up
 router.post('/create',usersController.create);
 

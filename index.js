@@ -38,8 +38,8 @@ app.use(session({
   name: 'codeial',                // name of the session-cookie
   // TODO change secret before deployment in production mode
   secret:'blahsomething',         // encryption key
-  saveUninitialized:false,
-  resave: false,
+  saveUninitialized:false,        //to prevent extra being stored in the cookie,when the user isnt logged-in
+  resave: false,                  //not to save the user data again and again
   cookie:{
     maxAge:(1000*60*100)          // the amount of time this cookie should be stored in ms, after that session-time-out
   }
@@ -49,10 +49,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticatedUser);
+
 // This is where the route (folder) is setup  using middleware
 //use express router
 app.use('/',require('./routes'));  // can also give path as - require('./routes/index') , but it by default takes index   file only, as the name of this file(entry file) nd route file is same
 
+
+// Setting up express server
 app.listen(port,function(err){
   if(err){console.log(`Error while setting up the server: ${err}`); return;}
 

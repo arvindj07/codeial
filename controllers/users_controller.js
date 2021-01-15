@@ -23,7 +23,6 @@ module.exports.signUp = function(req,res){
 
 
 
-
 // render the Sign-in page
 module.exports.signIn = function(req,res){
 
@@ -76,4 +75,11 @@ module.exports.createSession = function(req,res){
   // redirects to homepage after sign-in
   return res.redirect('/');             // assuming that user has already signed-in,as passport use local strategy to
                                         // Auth. the user
+}
+
+module.exports.destroySession = function(req,res){
+  //logout() func is given to req byb Passport.js
+  req.logout();
+
+  return res.redirect('/');
 }

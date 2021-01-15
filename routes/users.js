@@ -22,5 +22,7 @@ router.post('/create-session',passport.authenticate(   // this is the middleware
   {failureRedirect:'/users/sign-in'},
 ),usersController.createSession);  // if done then this action is called
 
+router.get('/sign-out',usersController.destroySession);
+
 
 module.exports = router;

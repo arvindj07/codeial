@@ -42,6 +42,7 @@ passport.use(new LocalStrategy({
 passport.serializeUser(function(user,done){
 
   //encrypted format of id is automatically stored in the cookie
+  // note:- the passport doesnt encrypts the cookie, its done by express-session lib
   done(null,user.id); 
 });
 

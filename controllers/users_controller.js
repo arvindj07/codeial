@@ -62,5 +62,7 @@ module.exports.create = function(req,res){
 
 // sign and create a session for the user
 module.exports.createSession = function(req,res){
-  // To Do
+  // redirects to homepage after sign-in
+  return res.redirect('/');             // assuming that user has already signed-in,as passport use local strategy to
+                                        // Auth. the user
 }

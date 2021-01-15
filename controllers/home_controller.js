@@ -2,7 +2,7 @@
 
 module.exports.home = function(req,res){
   // to display the cookie passed in req using Inspect tool in browser
-  console.log(req.cookies);
+  // console.log(req.cookies);
 
   //to access the cookie and reset it while sending back response to browser
   res.cookie('user_id',25);

@@ -79,6 +79,7 @@ module.exports.createSession = function(req,res){
 
 module.exports.destroySession = function(req,res){
   //logout() func is given to req byb Passport.js
+  // here we r removing the user's session cookie to remove identity
   req.logout();
 
   return res.redirect('/');

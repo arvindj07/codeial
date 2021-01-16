@@ -10,8 +10,18 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 // this lib is used to store the session cookie in a persistence storage(i.e, DB),as otherwise the cookie is erased after each server restart
 const MongoStore = require('connect-mongo')(session);  //unlike other lib, it requires an argument,i.e., 
-                                          //the session( express-session), as we have to store the session info in the DB
+ //the session( express-session), as we have to store the session info in the DB
+const sassMiddleware = require('node-sass-middleware');
 
+
+// using SASS middleware to convert scss to css
+app.use(sassMiddleware({
+  src:'./assets/scss',   // from  where to pick up scss files
+  dest:'./assets/css',    // where to put the converted css files
+  debug: true,            // to display error when not able to convert the files, false when in Production mode
+  outputStyle:'extended',  // to display the css code elaborately
+  prefix:'/css'       // prefix is set as we r now using sass ,so we have to tell what to chk 4in the href of css link tag
+}));
 //middleware to read the data passed by the forms using req.body ,method-POST
 app.use(express.urlencoded());
 
@@ -68,9 +78,11 @@ app.use(passport.setAuthenticatedUser);
 app.use('/',require('./routes'));  // can also give path as - require('./routes/index') , but it by default takes index   file only, as the name of this file(entry file) nd route file is same
 
 
+
 // Setting up express server
 app.listen(port,function(err){
   if(err){console.log(`Error while setting up the server: ${err}`); return;}
 
   console.log('Server running on port:', port);
 });
+

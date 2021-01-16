@@ -5,7 +5,9 @@
     </title>
 
     <!-- here the css is coming from root folder ASSETS as setup in the index.js file at entry point -->
-    <link rel="stylesheet" href="/css/layout.css"> 
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css"> 
+    <link rel="stylesheet" href="/css/footer.css"> 
     
     <!-- used to extract Styles from sub pages i.e, partials  -->
     <%- style %>
@@ -16,8 +18,11 @@
     <%- include('_header') %>
 
   <!-- here the content of the page will come which is rendered using the controller or action , eg: user_profile.ejs -->
-    <%- body %>
+    <main id="layout-main">
+      <%- body %>
 
+    </main>
+    
     <%- include('_footer') %>
 
     <!-- used to extract Scripts(js) from sub pages i.e, partials  -->  

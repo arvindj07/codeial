@@ -13,7 +13,7 @@ module.exports.profile = function(req,res){
   
 };
 
-
+// Update User Profile
 module.exports.update = function(req,res){
   //  user Authentication
   if(req.user.id == req.params.id){

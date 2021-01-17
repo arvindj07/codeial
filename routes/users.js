@@ -6,6 +6,8 @@ const usersController = require('../controllers/users_controller');
 
 // to display profile page
 router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
+
+// Update User Profile
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
 
 // to display sign-in and sign-up pg

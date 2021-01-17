@@ -1,44 +1,45 @@
+<link rel="stylesheet" href="/css/home.css">
 
-<h1>
-  <%= title %>
-</h1>
+<div id="home-container">
 
-<section id="feed-posts">
-  <h4>Posts</h4>
-
-    <!-- Make the Post form visible only to Logged-in Users -->
-  <% if(locals.user){ %> 
-    <!-- Create a Post using the Form -->
-    <form action="/posts/create" method="POST" id="new-post-form">
-      <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
-      <input type="submit" value="Post">
-
-    </form>
-    
-  <% } %>
+  <section id="feed-posts">
+    <h4>Posts</h4>
   
-       <!-- Display the Posts using for loop -->
-  <div id="posts-list-container">
-    <ul>
-      <% for(post of posts) {%>
-        
-      <%- include('_post') -%>       
-        
-      <% } %>
+      <!-- Make the Post form visible only to Logged-in Users -->
+    <% if(locals.user){ %> 
+      <!-- Create a Post using the Form -->
+      <form action="/posts/create" method="POST" id="new-post-form">
+        <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
+        <input type="submit" value="Post">
+  
+      </form>
+      
+    <% } %>
+    
+         <!-- Display the Posts using for loop -->
+    <div id="posts-list-container">
+      <ul>
+        <% for(post of posts) {%>
+          
+        <%- include('_post') -%>       
+          
+        <% } %>
+  
+      </ul>
+    </div>
+  
+  </section>
+  
+  <section id="user-friends">
+  
+    <h4>Friends</h4>
+  
+    <% for( u of all_users) { %> 
+      <p>
+          <!-- link to all the users in User collection, thats why we r passing id in URL(href) -->
+        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>  
+      </p>
+    <% } %>
+  </section>
 
-    </ul>
-  </div>
-
-</section>
-
-<section id="user-friends">
-
-  <h4>Friends</h4>
-
-  <% for( u of all_users) { %> 
-    <p>
-        <!-- link to all the users in User collection, thats why we r passing id in URL(href) -->
-      <a href="/users/profile/<%= u.id %>"><%= u.name %></a>  
-    </p>
-  <% } %>
-</section>
+</div>

@@ -14,6 +14,19 @@ module.exports.profile = function(req,res){
 };
 
 
+module.exports.update = function(req,res){
+  //  user Authentication
+  if(req.user.id == req.params.id){
+    User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+      if(err){console.log('error in finding the user'); return;}
+
+      return res.redirect('back');
+    });
+  }else{
+    return res.status(401).send('Unauthorized');
+  }
+};
+
 
 // render the sign-up page
 module.exports.signUp = function(req,res){

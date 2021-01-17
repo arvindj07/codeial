@@ -27,3 +27,22 @@ module.exports.create =function(req,res){
   });
   
 }
+
+//         DELETING a comment
+module.exports.destroy = function(req,res){
+  Comment.findById(req.params.id,function(err,comment){
+    // checking whether the user who is deleting the Comment is the one who Created it
+    if(comment.user == req.user.id){
+
+      let postId = comment.post;   // storing Post.id to delete the comment from the array in Post
+      comment.remove();   // deleted
+      
+      // to Update the Post schema by deleting the coment from the array, $pull deletes the matching comment
+      Post.findByIdAndUpdate(postId,{ $pull:{comments:req.params.id}},function(err,post){
+        return res.redirect('back');
+      });
+    }else{
+      return res.redirect('back');
+    }
+  });
+}

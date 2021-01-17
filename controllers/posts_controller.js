@@ -1,4 +1,5 @@
 const Post= require('../models/post');
+const Comment= require('../models/comment');
 
 //  Create a Post
 module.exports.create =function(req,res){
@@ -10,5 +11,27 @@ module.exports.create =function(req,res){
 
     return res.redirect('back');
 
+  });
+}
+
+
+//   DELETING the Post
+module.exports.destroy = function(req,res){
+  // check if post exists
+  Post.findById(req.params.id,function(err,post){
+
+    // checking whether the user who is deleting the Post is the one who Created it
+    // .id means converting the object id into string(so not using _id)
+    // here post.user gives id as its not populated yet
+    if(post.user ==req.user.id ){
+      post.remove();        // post deleted
+
+      Comment.deleteMany({post:req.params.id},function(err){
+        return res.redirect('back');
+      });
+
+    }else{
+      return res.redirect('back');
+    }
   });
 }

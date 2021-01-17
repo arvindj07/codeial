@@ -1,6 +1,6 @@
 
 <h1>
-  Codeial | <%= title %>
+  <%= title %>
 </h1>
 
 <section id="feed-posts">
@@ -24,6 +24,15 @@
         
         <p>
           <li>
+            <!-- Creating delete button for Post  -->
+            <!-- check for user sign-in nd the current user nd the post-user should be same -->
+             <% if (locals.user && (locals.user.id == post.user.id) ) { %> 
+              <small>
+                <!-- passing post.id as string/url params -->
+                <a href="/posts/destroy/<%= post.id %>">X</a>   
+              </small>
+
+            <% } %>
             <%= post.content %>
             <br>
             <small>
@@ -53,6 +62,14 @@
 
               <% for(comment of post.comments) { %>
                 <p>
+                  <!-- Creating delete button for Comment  -->
+                  <% if (locals.user && (locals.user.id == comment.user.id) ) { %> 
+                    <small>
+                      <!-- passing post.id as string/url params -->
+                      <a href="/comments/destroy/<%= comment.id %>">X</a>   
+                    </small>
+
+                  <% } %>
                   <%= comment.content %>
                   <br>
                   <small>

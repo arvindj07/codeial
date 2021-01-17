@@ -1,0 +1,50 @@
+<li>
+  <p>
+    <!-- Creating delete button for Post  -->
+    <!-- check for user sign-in nd the current user nd the post-user should be same -->
+      <% if (locals.user && (locals.user.id == post.user.id) ) { %> 
+      <small>
+        <!-- passing post.id as string/url params -->
+        <a href="/posts/destroy/<%= post.id %>">X</a>   
+      </small>
+
+    <% } %>
+    <%= post.content %>
+    <br>
+    <small>
+      <%= post.user.name %>
+    </small>
+  </p>
+    
+  
+     <!-- Create a comment on a particular Post if the user is Signed-In  -->
+  
+  <div class="post-comments">
+    <% if(locals.user) { %>
+      <form action="/comments/create" method="POST">
+        <input type="text" name="content" placeholder="Add Comment..." required>
+            <!-- here we r sending the Post id in a hidden manner using input type-hidden -->
+        <input type="hidden" name="post" value="<%= post._id %>">      
+        <input type="submit" value="Add Comment">
+
+      </form>
+
+    <% } %>
+
+
+      <!-- Displaying the Comments on each post -->
+    <div id="post-comments-list">
+      <ul id="post-comments-<%= post._id %>">
+
+        <% for(comment of post.comments) { %>
+          
+          <%- include('_comment') -%>
+
+        <% } %>
+
+      </ul>
+
+    </div>
+  </div>
+
+</li> 

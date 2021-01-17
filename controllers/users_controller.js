@@ -2,9 +2,15 @@ const User = require('../models/user');
 
 // render the profile page
 module.exports.profile = function(req,res){
-  return res.render('user_profile',{
-    title: 'Profile'
+  User.findById(req.params.id,function(err,user){
+    if(err){console.log('error in finding the user'); return;}
+
+    return res.render('user_profile',{
+      title: 'Profile',
+      profile_user:user   // dont use user instead of profile user,as its the local-user who is signed in
+    });
   });
+  
 };
 
 

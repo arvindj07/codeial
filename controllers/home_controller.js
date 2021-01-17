@@ -1,5 +1,6 @@
 // for every action in the controller u have to setup the route, controllers are collections of actions
 const Post = require('../models/post');
+const User = require('../models/user');
 
 // Render Home page and Pass elements to the Views
 module.exports.home = function(req,res){
@@ -17,10 +18,15 @@ module.exports.home = function(req,res){
       path:'user'
     }
   }).exec(function(err,posts){
-    return res.render('home',{
-      title:'Codieal | Home',
-      posts: posts
+
+    User.find({},function(err,users){
+      return res.render('home',{
+        title:'Codieal | Home',
+        posts: posts,
+        all_users:users
+      });
     });
+
   });
 
     

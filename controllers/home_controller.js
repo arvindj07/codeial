@@ -3,33 +3,38 @@ const Post = require('../models/post');
 const User = require('../models/user');
 
 // Render Home page and Pass elements to the Views
-module.exports.home = function(req,res){
+// declairing async Function-  ASYNC AWAIT
+module.exports.home =  async function(req,res){
   // to display the cookie passed in req using Inspect tool in browser
   // console.log(req.cookies);
   //to access the cookie and reset it while sending back response to browser
   // res.cookie('user_id',25);
 
-  // to get all the posts in Post DB/collection and populate the User of each post
-  Post.find({})
-  .populate('user')
-  .populate({
-    path:'comments',
-    populate:{
-      path:'user'
-    }
-  }).exec(function(err,posts){
+  try{
 
-    User.find({},function(err,users){
-      return res.render('home',{
-        title:'Codieal | Home',
-        posts: posts,
-        all_users:users
-      });
+    // to get all the posts in Post DB/collection and populate the User of each post
+    // await is used to wait for the Async queries to get Complete,i.e, no multiple threads r created
+    let posts= await Post.find({})
+    .populate('user')
+    .populate({
+      path:'comments',
+      populate:{
+        path:'user'
+      }
     });
 
-  });
-
+    let users = await User.find({});
     
+    return res.render('home',{
+      title:'Codieal | Home',
+      posts: posts,
+      all_users:users
+    });
+    
+  }catch(err){
+    console.log('Error',err);
+  }
+        
 }
 
 // module.exports.actionName= function(req,res){}

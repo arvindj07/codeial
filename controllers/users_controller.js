@@ -91,6 +91,7 @@ module.exports.create = function(req,res){
 
 // sign and create a session for the user
 module.exports.createSession = function(req,res){
+  req.flash('success','Logged in successfully');  //as flash is an object,nd success is an argument/field of the object
   // redirects to homepage after sign-in
   return res.redirect('/');             // assuming that user has already signed-in,as passport use local strategy to
                                         // Auth. the user
@@ -101,6 +102,7 @@ module.exports.destroySession = function(req,res){
   //logout() func is given to req byb Passport.js
   // here we r removing the user's session cookie to remove identity
   req.logout();
+  req.flash('success','Logged out!');//to put these flash msgs into res,we use a middleware called middleware.js in config
 
   return res.redirect('/');
 }

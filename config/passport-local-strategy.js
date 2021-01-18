@@ -11,21 +11,22 @@ const User = require('../models/user');
 //Creating the AUTHENTICATION function 
 // i.e.,passport using Local Strategy to find the user who is signed in
 passport.use(new LocalStrategy({
-  usernameField: 'email'   // setting it to username field in schema, which is email in case of our User Schema
+  usernameField: 'email',   // setting it to username field in schema, which is email in case of our User Schema
+  passReqToCallback: true,  //this helps to use req as first arg in the below func, which is used to setup flash msg
   },  
-  function(email,password,done){  // email, password passed from the forms and done is a callback function, to check if 
+  function(req,email,password,done){  // email, password passed from the forms and done is a callback function, to check if 
                                   //there is an error or the authentication is successful etc..
 
     // find user and establish Identity
     User.findOne({email:email},function(err,user){
       if(err){
-        console.log('Error in finding User ------> Passport');
+        req.flash('error',err);
         return done(err);  // report error to passport
       }
 
       //if user not found or password didnt match
       if(!user || user.password != password){
-        console.log('Error in finding User ------> Passport');
+        req.flash('error','Invalid Username/Password');
         return done(null,false);//no error,but as user not found/incorrect pwd,so authentication not done,so we pass false
       }
 

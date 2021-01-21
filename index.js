@@ -78,7 +78,7 @@ app.use(passport.setAuthenticatedUser);
 
 // Using Flash for flash-msgs
 app.use(flash());   // placed after Session ,coz it uses Session cookies to store flash-msgs
-app.use(customMiddleware.setFlash);  // use the middleware to flash set msg in res (response)
+app.use(customMiddleware.setFlash);  // use the middleware to set the flash-msg in res (response)
 
 // This is where the route (folder) is setup  using middleware
 //use express router

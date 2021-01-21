@@ -15,6 +15,7 @@ module.exports.home =  async function(req,res){
     // to get all the posts in Post DB/collection and populate the User of each post
     // await is used to wait for the Async queries to get Complete,i.e, no multiple threads r created
     let posts= await Post.find({})
+    .sort('-createdAt')         // Used to Display the newest post first, using createdAt field in schema
     .populate('user')
     .populate({
       path:'comments',

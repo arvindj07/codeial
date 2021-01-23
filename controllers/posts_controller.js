@@ -48,8 +48,8 @@ module.exports.destroy = async function(req,res){
       post.remove();        // post deleted
 
        await Comment.deleteMany({post:req.params.id});
-       
-       // To check if the Request is an XmlHttpRequest (i.e, passed using Ajax)
+
+       // To check if the Request is an XmlHttpRequest (i.e, Ajax req)
        if(req.xhr){
         return res.status(200).json({
           data:{

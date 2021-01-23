@@ -14,16 +14,41 @@ module.exports.profile = function(req,res){
 };
 
 // Update User Profile
-module.exports.update = function(req,res){
+module.exports.update = async function(req,res){
   //  user Authentication
-  if(req.user.id == req.params.id){
-    User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-      if(err){console.log('error in finding the user'); return;}
+  // if(req.user.id == req.params.id){
+  //   User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+  //     if(err){console.log('error in finding the user'); return;}
+
+  //     req.flash('success','Updated!');
+  //     return res.redirect('back');
+  //   });
+  // }else{
+  //   req.flash('error','Unauthorized!');
+  //   return res.status(401).send('Unauthorized');
+  // }
+
+  try{
+    let user= await User.findById(req.params.id);
+    User.uploadedAvatar(req,res,function(err){
+      if(err){console.log('********Multer Error: ',err); return;}
+
+      user.name = req.body.name;
+      user.email=req.body.email;
+      // to chk if the img file is passed (as its not mandatory)
+      if(req.file){
+        // this is saving the  path of uploaded file into the avatar field in the user
+        user.avatar= User.avatarPath+'/'+req.file.filename;
+      }
+      user.save();
 
       return res.redirect('back');
     });
-  }else{
-    return res.status(401).send('Unauthorized');
+      
+
+  }catch(err){
+    req.flash('error',err);
+    return res.redirect('back');  
   }
 };
 

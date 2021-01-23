@@ -39,7 +39,13 @@ let storage = multer.diskStorage({
   }
 });
 
-// To be Able to Use the Storage
+// To be Able to Use the storage
+// uploadedAvatar is  static mathods to User model i.e., User.uploadedAvatar
+//storing storage in multer's storage key
+userSchema.statics.uploadedAvatar= multer({storage:storage}).single('avatar'); // avatar here represents the field in   
+                                                                                //Schema
+//static data member
+userSchema.statics.avatarPath= AVATAR_PATH;
 
 const User = mongoose.model('User',userSchema);
 

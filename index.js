@@ -35,6 +35,9 @@ app.use(cookieParser());
 // To SETUP the ASSETS folder for CSS and other files, so that the view files can access them through root folder ASSETS
 app.use(express.static('./assets'));
 
+//make the uploads Path available to browser( for the Profile avatar)
+app.use('/uploads',express.static(__dirname+'/uploads'));
+
 // used to SETUP the LAYOUT that is used in Views, the filename is layout which is default names
 // its placed before setting-up the views and view-engine coz the layout is to be set before as when it reaches views, the layout should be already set
 app.use(expressLayouts);

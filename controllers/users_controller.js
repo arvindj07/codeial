@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const fs= require('fs');
 const path = require('path');
-const { format } = require('path');
+
 
 
 // render the profile page

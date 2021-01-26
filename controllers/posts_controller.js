@@ -10,6 +10,7 @@ module.exports.create = async function(req,res){
       user: req.user._id,       // getting this user from Passport strategy, from callback func done() whne authenticated
     });
 
+    // this req is made from home_posts.js in assets/js
     // To check if the Request is an XmlHttpRequest (i.e, passed using Ajax)
     if(req.xhr){
 
@@ -22,7 +23,7 @@ module.exports.create = async function(req,res){
       });
     }
     
-    req.flash('success','Post Published!');
+    req.flash('success','Post Published!');  // while Ajax req, these last 2 lines arent executed,as we return json obj
     return res.redirect('back');
 
   }catch(err){

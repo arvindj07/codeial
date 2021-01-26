@@ -91,7 +91,7 @@
         type:'get',
         url:$(deleteLink).prop('href'), //this is how u get the value of href in <a> tag
         success:function(data){
-          $(`#post-${data.data.post_id}`).remove();    // removing the post using the id(css selector) specified in each post
+          $(`#post-${data.data.post_id}`).remove(); // removing the post using the id(css selector) specified in each post
         },
         error:function(error){
           console.log(error.responseText);

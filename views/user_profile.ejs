@@ -1,6 +1,8 @@
 
     <link rel="stylesheet" href="/css/user_profile.css">
     <h1>User | Profile</h1>
+
+    <!-- Displaying the Profile Pic  -->
     <div>
         <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100" >
     </div>
@@ -8,10 +10,11 @@
 
     <% if(user.id == profile_user.id) { %>
         <!-- if user matches,then show the Update-form  -->
-
+        <!-- multipart in enctype means the FORM can have text and Files(long stream of data) also -->
         <form action="/users/update/<%= profile_user.id %>" method="POST" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
             <input type="text" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+            <!-- input type - file for image upload -->
             <input type="file" name="avatar" placeholder="Profile Picture">
             <input type="submit" value="Update">
         </form>

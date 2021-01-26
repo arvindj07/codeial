@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const fs= require('fs');
 const path = require('path');
+const { format } = require('path');
 
 
 // render the profile page
@@ -34,9 +35,13 @@ module.exports.update = async function(req,res){
   if(req.user.id == req.params.id){
 
     try{
+      // finding the User
       let user= await User.findById(req.params.id);
 
-      // using the static function we r accessing the req.body(with the help multipart and multer)
+      // we cannot use req.body params directly as its a multipart-format, 
+      // we can access the req.body params with the help of multer, ie., by using User.uploadedAvatar as it uses multer which takes in req as parameter in diskStorage
+
+      // using the static function we r accessing the req.body to update(with the help multipart and multer)
       User.uploadedAvatar(req,res,function(err){
         if(err){console.log('********Multer Error: ',err); return;}
   

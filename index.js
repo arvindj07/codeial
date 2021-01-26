@@ -36,6 +36,7 @@ app.use(cookieParser());
 app.use(express.static('./assets'));
 
 //make the uploads Path available to browser( for the Profile avatar)
+// now the current directory+ /uploads path is available on /uploads 
 app.use('/uploads',express.static(__dirname+'/uploads'));
 
 // used to SETUP the LAYOUT that is used in Views, the filename is layout which is default names

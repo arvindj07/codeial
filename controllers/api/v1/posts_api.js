@@ -26,7 +26,7 @@ module.exports.index= async function(req,res){
 }
 
 // in this ACTION we r deleting the Post selected(i.e., a particular post is idetified using the id params,which is passed along with the api call in Postman) and associated comments and then returning the JSON object with a message of successful Deletion 
-// NOTE: we r not checking for Authenticated Users here, as there r none, we r just checking the whether the api is working or not
+
 module.exports.destroy = async function(req,res){
 
   try{
@@ -37,7 +37,7 @@ module.exports.destroy = async function(req,res){
     // checking whether the user who is deleting the Post is the one who Created it
     // .id means converting the object id into string(so not using _id)
     // here post.user gives id as its not populated yet
-    // if(post.user ==req.user.id ){
+    if(post.user ==req.user.id ){
       post.remove();        // post deleted
 
        await Comment.deleteMany({post:req.params.id});
@@ -46,10 +46,11 @@ module.exports.destroy = async function(req,res){
         message:"Post and associated comments Deleted!"
        });
 
-    // }else{
-    //   req.flash('error','Not Authorized to Delete Post');
-    //   return res.redirect('back');
-    // }
+    }else{
+      return res.json(401,{
+        message:"Unauthorised to Delete Post"
+      });
+    }
 
   }catch(err){
     // req.flash('error',err);

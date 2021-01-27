@@ -1,5 +1,7 @@
 //Just Read Passport-jwt Documentation
 
+// NOTE: This strategy is used in the API requests only. ie., we use it in api controlllers and use it using POSTMAN
+
 const passport=require('passport');
 // This is used to import the Strategy
 const JWTStrategy = require('passport-jwt').Strategy;

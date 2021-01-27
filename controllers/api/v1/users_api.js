@@ -25,7 +25,7 @@ module.exports.createSession = async function(req,res){
         // jwt.sign() is a func in jwt(jsonwebtoken) lib to generate token,
         //user.toJSON convert user to JSON obj, 'codeial' is the key used for encryption (it should be the same key used for decryption in Passport-jwt strategy), expiresIn - for setting expiry time for token
         // user.toJSON()- this is the part which gets encrypted
-        token: jwt.sign(user.toJSON(),'codeial',{expiresIn:'10000'})
+        token: jwt.sign(user.toJSON(),'codeial',{expiresIn:'100000'})
       }
     });
 

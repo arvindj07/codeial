@@ -7,10 +7,12 @@ const db = require('./config/mongoose');
 // used for Session cookie
 const session = require('express-session');
 //Passport lib and Strategies
-// if strategies r not required here, it will show 'Not Authorised'
+// if strategies r not required here, it will show 'Unknown Authentication Strategy'
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT=require('./config/passport-jwt-strategy'); 
+const passportGoogle=require('./config/passport-google-oauth2-strategy');
+
 // this lib is used to store the session cookie in a persistence storage(i.e, DB),as otherwise the cookie is erased after each server restart
 const MongoStore = require('connect-mongo')(session);  //unlike other lib, it requires an argument,i.e., 
  //the session( express-session), as we have to store the session info in the DB

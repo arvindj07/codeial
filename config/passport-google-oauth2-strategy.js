@@ -17,8 +17,9 @@ passport.use(new googleStrategy({
     // profile.emails[0].value is used to get the email of signed-in user 
     User.findOne({email:profile.emails[0].value}).exec(function(err,user){
       if(err){console.log('error in Google Strategy Passport ',err); return;}
-
-      console.log(profile);
+      // console.log(accessToken);
+      // console.log(refreshToken);
+      // console.log(profile);
 
       // if the user is found in DB, then we return the user i.e.,set user as req.user
       // Sign-In

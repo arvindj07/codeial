@@ -24,8 +24,9 @@ module.exports.create = async function(req,res){
 
       
       //comments_mailer is called to send an email to the user who creates the comment
-      comment= await comment.populate('user','name email').execPopulate();// this is used to populate user's info like 
+      comment= await comment.populate('user').execPopulate();// this is used to populate user's info like 
                                                                           //email, to pass it to mailer
+      //comment= await comment.populate('user','name email').execPopulate(); // use this if the above code doesnt work
       commentsMailer.newComment(comment);
 
       return res.redirect('/');

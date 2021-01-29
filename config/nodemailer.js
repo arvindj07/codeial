@@ -23,6 +23,8 @@ let transporter = nodemailer.createTransport({
 //Whenever we r sending html email, there exists some html/ejs files which we will be sending to the user 
 //This func sets the path of those files
 // relativePath is the place from where ,this func is called 
+
+//renderTemplpate is set/used in mailers/comments_mailer.js
 let renderTemplate= (data,relativePath) => {  // using arrow function for chnge
   let mailHtml;
   ejs.renderFile(

@@ -2,9 +2,10 @@ const nodemailer = require('nodemailer');
 const ejs= require('ejs');
 const path= require('path');
 
+//NOTES: The func which sends mail is in mailers/comments_mailer
+
 //Defines the configuration using which we will be sending email
 
-// This is the part which sends the email,
 //The connection with the MAILING SERVER is set here
 let transporter = nodemailer.createTransport({
   service:'gmail',
@@ -22,7 +23,7 @@ let transporter = nodemailer.createTransport({
 //Whenever we r sending html email, there exists some html/ejs files which we will be sending to the user 
 //This func sets the path of those files
 // relativePath is the place from where ,this func is called 
-let renderTemplate= (data,relativePath) => {
+let renderTemplate= (data,relativePath) => {  // using arrow function for chnge
   let mailHtml;
   ejs.renderFile(
     path.join(__dirname,'../views/mailers',relativePath), // this path will contain all the html/ejs Templates

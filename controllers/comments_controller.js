@@ -1,6 +1,6 @@
 const Comment= require('../models/comment');
 const Post = require('../models/post');
-
+const commentsMailer = require('../mailers/comments_mailer');
 // Create a comment ,here we have to add comment in both Comment Schema nd Post Schema Array
 module.exports.create = async function(req,res){
 
@@ -21,6 +21,12 @@ module.exports.create = async function(req,res){
       // here the comment is pushed to the array of comments in Post Schema
       post.comments.push(comment);  // it automatically fetch-out the id of comment nd push it
       post.save();      // we have to save after every update to store in DB, before this ,its only in the memory(RAM)
+
+      
+      //comments_mailer is called to send an email to the user who creates the comment
+      comment= await comment.populate('user','name email').execPopulate();// this is used to populate user's info like 
+                                                                          //email, to pass it to mailer
+      commentsMailer.newComment(comment);
 
       return res.redirect('/');
     }

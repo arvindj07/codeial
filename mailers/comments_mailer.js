@@ -10,7 +10,8 @@ exports.newComment = (comment) => {
                                                                                       //defined in nodemailer.js
                                                                                       //should provide .ejs extention
 
-  //sendMail is a predefined arg, chk the documentation for more info
+  //sendMail is a predefined argument, chk the documentation for more info
+  // sendMail is the func that sends the Mail
   nodemailer.transporter.sendMail({
     from: 'Codeial@gmail.com', // sender address
     to: comment.user.email, // list of receivers

@@ -4,7 +4,7 @@ const path= require('path');
 
 //NOTES: The func which sends mail is in mailers/comments_mailer
 
-//Defines the configuration using which we will be sending email
+//Below func Defines the configuration using which we will be sending email
 
 //The connection with the MAILING SERVER is set here
 let transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-//Definies the TEMPLATE that is to be used
+//Below func Definies the TEMPLATE that is to be used
 
 //Whenever we r sending html email, there exists some html/ejs files which we will be sending to the user 
 //This func sets the path of those files
@@ -33,7 +33,7 @@ let renderTemplate= (data,relativePath) => {  // using arrow function for chnge
     function(err,template){
       if(err){console.log('error in rendering template: ',err); return ;}
 
-      mailHtml=template;
+      mailHtml=template;  //set Template
     }
   )
 

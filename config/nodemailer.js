@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
   secure: false, // true for 465, false for other ports
   auth: {   // The gmail- account details of user to Establish their identity with gmail
     user: 'tommycruise1997', // user
-    pass: 'ron@ldo7', // password
+    pass: 'Ron@ldo07', // password 
   },
 });
 

@@ -21,6 +21,13 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMiddleware = require('./config/middleware');
 
+//Configuring Web Socket
+//Setup chat server to be used with socket.io
+const chatServer = require('http').Server(app);  // the 'app' in the arg is the one in line-3
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('Chat Server is listening on port 5000');
+
 
 // using SASS middleware to convert scss to css
 app.use(sassMiddleware({

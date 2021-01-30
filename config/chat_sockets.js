@@ -37,5 +37,13 @@ module.exports.chatSockets = function(socketServer){
       //io.in(data.chatroom) is used to emit within the chat-room, otherwise we could have used just emit()
       io.in(data.chatroom).emit('user_joined',data);
     })
+
+    // RECEIVE MSG 
+    // CHANGE :: detect send_message and broadcast to everyone in the room
+    socket.on('send_message', function(data){
+      //EMIT
+      io.in(data.chatroom).emit('receive_message', data);
+    });
+
   });
 }

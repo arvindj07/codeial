@@ -41,5 +41,51 @@ class ChatEngine{
         console.log('User joined',data);
       });
     });
+
+    //SENDING MESSAGE
+    // CHANGE :: send a message on clicking the send message button
+    $('#send-message').click(function(){
+      let msg = $('#chat-message-input').val(); // val() to get the content of msg sent
+
+      if (msg != ''){
+        //EMIT
+          self.socket.emit('send_message', {
+              message: msg,           // message contains the msg sent
+              user_email: self.userEmail,
+              chatroom: 'codeial'
+          });
+      }
+    });
+
+    //RECEIVE MSG
+    self.socket.on('receive_message',function(data){
+      console.log('message received',data.message);
+
+      let newMessage= $('<li>'); // creating a list-item
+
+      let messageType = 'other-message'; // setting it to a classname in chat_box.scss
+
+      // to check if the same user receives the msg, then chng messageType to self-message(another class)
+      //These classes r used to set the alignment of msgs differently for the dending nd receiving user,ie., left aligned and right aligned
+      if(data.user_email == self.userEmail){
+        messageType= 'self-message';
+      }
+
+      // appending span element to list item 
+      newMessage.append($('<span>',{
+        'html':data.message     // setting the content
+      }));
+
+      newMessage.append($('<sub>',{
+        'html':data.user_email
+      }));
+
+      newMessage.addClass(messageType); // adding the class
+
+      $('#chat-messages-list').append(newMessage); // Append the 'newMessage' list to the 
+                                                   //unordered list  'chat-messages-list' in _chat_box.ejs in views
+
+    });
+
   }
 }

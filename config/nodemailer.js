@@ -1,22 +1,14 @@
 const nodemailer = require('nodemailer');
 const ejs= require('ejs');
 const path= require('path');
+const env=require('./environment')
 
 //NOTES: The func which sends mail is in mailers/comments_mailer
 
 //Below func Defines the configuration using which we will be sending email
 
 //The connection with the MAILING SERVER is set here
-let transporter = nodemailer.createTransport({
-  service:'gmail',
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {   // The gmail- account details of user to Establish their identity with gmail
-    user: 'tommycruise1997', // user
-    pass: 'Ron@ldo07', // password 
-  },
-});
+let transporter = nodemailer.createTransport(env.smtp);
 
 //Below func Definies the TEMPLATE that is to be used
 

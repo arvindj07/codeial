@@ -3,13 +3,14 @@ const googleStrategy= require('passport-google-oauth').OAuth2Strategy;// to use 
 const crypto= require('crypto'); //to generate an encrypted password that is to store in DB while signing-in/up using 
                                   //google, as password is a required field in User schema
 const User = require('../models/user');
+const env=require('./environment');
 
 // To tell Passport to use Google strategy
 passport.use(new googleStrategy({
     // setting the options
-    clientID: "393761501294-q8cslu8hojllcibaln70varvopr5pdjf.apps.googleusercontent.com",
-    clientSecret: "NQ3iRjtKoN5b4pPA-Ge_dXST",
-    callbackURL: "http://localhost:8000/users/auth/google/callback",
+    clientID: env.google_client_id,
+    clientSecret: env.google_client_secret,
+    callbackURL: env.google_call_back_url,
   },
   // The Callback function
   function(accessToken, refreshToken, profile, done) { 

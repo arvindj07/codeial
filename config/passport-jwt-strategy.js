@@ -9,13 +9,14 @@ const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const User= require('../models/user');
+const env= require('./environment');
 
 //opts is an object containing options to control how the token is extracted from the request or verified.
 let opts={
   // used to get the JWT token form req header
   jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken(),//here the Header is a list of Keys,which contains an Auth key
                                                     //(authurization key), which also has a set of keys, which contains a key called Bearer. This Bearer will contain JWT Token
-  secretOrKey :'codeial', // Decryption key used o decrypt the token
+  secretOrKey :env.jwt_secret, // Decryption key used o decrypt the token
 };
 
 // make passport use the jwt-startegy by passing opt and get back the Jwt Payload

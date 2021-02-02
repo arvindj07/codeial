@@ -1,4 +1,6 @@
 const express=require('express');
+// Require the environment.js file from config
+const env=require('./config/environment');
 const cookieParser = require('cookie-parser');
 const app=express();
 const port=8000;
@@ -27,12 +29,13 @@ const chatServer = require('http').Server(app);  // the 'app' in the arg is the 
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('Chat Server is listening on port 5000');
+const path=require('path');
 
 
 // using SASS middleware to convert scss to css
 app.use(sassMiddleware({
-  src:'./assets/scss',   // from  where to pick up scss files
-  dest:'./assets/css',    // where to put the converted css files
+  src:path.join(__dirname,env.asset_path,'scss'),   // from  where to pick up scss files,ie.,'./assets/scss'
+  dest:path.join(__dirname,env.asset_path,'css'),    // where to put the converted css files
   debug: true,            // to display error when not able to convert the files, false when in Production mode
   outputStyle:'extended',  // to display the css code elaborately
   prefix:'/css'       // prefix is set as we r now using sass ,so we have to tell what to chk 4in the href of css link tag
@@ -45,7 +48,7 @@ app.use(cookieParser());
 
 
 // To SETUP the ASSETS folder for CSS and other files, so that the view files can access them through root folder ASSETS
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 
 //make the uploads Path available to browser( for the Profile avatar)
 // now the current directory+ /uploads path is available on /uploads 
@@ -69,7 +72,7 @@ app.set('views','./views');
 app.use(session({
   name: 'codeial',                // name of the session-cookie
   // TODO change secret before deployment in production mode
-  secret:'blahsomething',         // encryption key
+  secret:env.session_cookie_key,         // encryption key
   saveUninitialized:false,        //to prevent extra being stored in the cookie,when the user isnt logged-in
   resave: false,                  //not to save the user data again and again
   cookie:{

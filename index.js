@@ -1,6 +1,7 @@
 const express=require('express');
 // Require the environment.js file from config
 const env=require('./config/environment');
+const logger= require('morgan');// lib for log files
 const cookieParser = require('cookie-parser');
 const app=express();
 const port=8000;
@@ -30,16 +31,20 @@ const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('Chat Server is listening on port 5000');
 const path=require('path');
+const morgan = require('morgan');
 
+// the scss to css convertion should only take place during DEVELOPMENT and not in PRODUCTION
+if(env.name == 'development'){
+  // using SASS middleware to convert scss to css
+  app.use(sassMiddleware({
+    src:path.join(__dirname,env.asset_path,'scss'),   // from  where to pick up scss files,ie.,'./assets/scss'
+    dest:path.join(__dirname,env.asset_path,'css'),    // where to put the converted css files
+    debug: true,            // to display error when not able to convert the files, false when in Production mode
+    outputStyle:'extended',  // to display the css code elaborately
+    prefix:'/css'       // prefix is set as we r now using sass ,so we have to tell what to chk 4in the href of css link tag
+  }));
+}
 
-// using SASS middleware to convert scss to css
-app.use(sassMiddleware({
-  src:path.join(__dirname,env.asset_path,'scss'),   // from  where to pick up scss files,ie.,'./assets/scss'
-  dest:path.join(__dirname,env.asset_path,'css'),    // where to put the converted css files
-  debug: true,            // to display error when not able to convert the files, false when in Production mode
-  outputStyle:'extended',  // to display the css code elaborately
-  prefix:'/css'       // prefix is set as we r now using sass ,so we have to tell what to chk 4in the href of css link tag
-}));
 //middleware to read the data passed by the forms using req.body ,method-POST
 app.use(express.urlencoded());
 
@@ -53,6 +58,9 @@ app.use(express.static(env.asset_path));
 //make the uploads Path available to browser( for the Profile avatar)
 // now the current directory+ /uploads path is available on /uploads 
 app.use('/uploads',express.static(__dirname+'/uploads'));
+
+//Setting-up logger for log-files
+app.use(logger(env.morgan.mode,env.morgan.options));
 
 // used to SETUP the LAYOUT that is used in Views, the filename is layout which is default names
 // its placed before setting-up the views and view-engine coz the layout is to be set before as when it reaches views, the layout should be already set

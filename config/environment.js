@@ -1,5 +1,24 @@
 // it will contain both DEVELOPMENT and  PRODUCTION Environment
 
+const fs = require('fs');
+const rfs = require('rotating-file-stream');
+const path = require('path');
+
+//Directory in which logs will be stored
+const logDirectory = path.join(__dirname,'../production_logs');
+
+//find if production_logs already exists or it should be created
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory); //.exstsSync- if prodn_logs already exists, mkdir- to create it
+
+// create a rotating write stream
+ //log files will be called access.log
+const accessLogStream = rfs.createStream('access.log', {
+  interval: '1d', // rotate daily
+  path: logDirectory
+});
+
+
+
 const development={
   name:'development',
   asset_path:'./assets',          // here './' is required, not just '/'
@@ -19,6 +38,10 @@ const development={
   google_client_secret: "NQ3iRjtKoN5b4pPA-Ge_dXST",
   google_call_back_url: "http://localhost:8000/users/auth/google/callback",
   jwt_secret:'codeial',
+  morgan:{
+    mode:'dev',
+    options:{stream: accessLogStream }
+  },
 }
 
 const production={
@@ -40,6 +63,10 @@ const production={
   google_client_secret: process.env.CODEIAL_GOOGLE_CLIENT_SECRET,
   google_call_back_url: process.env.CODEIAL_GOOGLE_CALLBACK_URL, 
   jwt_secret: process.env.CODEIAL_JWT_SECRET,
+  morgan:{
+    mode:'combined',
+    options:{stream: accessLogStream }
+  },
 }
 // eval is used to convert the string stored in process.env.... to a variable i.e, to use production object
 // we can also use 'NODE_ENV' instead of 'CODEIAL_ENVIRONMENT'

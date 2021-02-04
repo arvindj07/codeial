@@ -31,7 +31,7 @@ const development={
       secure: false, // true for 465, false for other ports
       auth: {   // The gmail- account details of user to Establish their identity with gmail
         user: 'tommycruise1997', // user
-        pass: 'Ron@ldo07', // password 
+        pass: 'xxxxxxx', // password 
       },
     },
   google_client_id: "393761501294-q8cslu8hojllcibaln70varvopr5pdjf.apps.googleusercontent.com",

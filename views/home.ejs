@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
 <!-- Styling for Chat-box  -->
-<link rel="stylesheet" href="/css/chat_box.css">
+<link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
 
 <div id="home-container">
 
@@ -51,11 +51,11 @@
 
  <!-- Ajax File -->
  <!-- Its The Js File which consists of the Ajax Way/Functions od Creating and Deleting Post Dynamically -->
-<script src="/js/home_posts.js"></script>
+<script src="<%= assetPath('js/home_posts.js') %>"></script>
 
  <!-- Setting up Chat Server / Web Socket.io at client side -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <!-- front-end established for creating a connection -->
 <% if (locals.user){ %>
 <script>

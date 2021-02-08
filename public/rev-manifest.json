@@ -4,5 +4,7 @@
   "css/header.css": "css/header-0aa2a6e463.css",
   "css/home.css": "css/home-ef48fa1202.css",
   "css/layout.css": "css/layout-e69f9c6145.css",
-  "css/user_profile.css": "css/user_profile-bf94b0b59a.css"
+  "css/user_profile.css": "css/user_profile-bf94b0b59a.css",
+  "js/home_posts.js":"js/home_posts-b2473f9209.js",
+  "js/chat_engine.js":"js/chat_engine-d798c8ce33.js"
 }

@@ -12,9 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
     <!-- here the css is coming from root folder ASSETS as setup in the index.js file at entry point -->
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/header.css"> 
-    <link rel="stylesheet" href="/css/footer.css"> 
+    <link rel="stylesheet" href="<%= assetPath('css/layout.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>"> 
+    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>"> 
     
     <!-- used to extract Styles from sub pages i.e, partials  -->
     <%- style %>

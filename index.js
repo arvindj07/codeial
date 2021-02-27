@@ -48,7 +48,7 @@ if(env.name == 'development'){
 }
 
 //middleware to read the data passed by the forms using req.body ,method-POST
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 
 //using cookie-parser
 app.use(cookieParser());

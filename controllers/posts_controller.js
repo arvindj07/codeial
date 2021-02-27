@@ -14,7 +14,7 @@ module.exports.create = async function(req,res){
     // To check if the Request is an XmlHttpRequest (i.e, passed using Ajax)
     if(req.xhr){
 
-      // returing an Jsonn object to the xhr request, ie, to home_posts.js in /css/js/
+      // returing an Json object to the xhr request, ie, to home_posts.js in /assets/js/
       return res.status(200).json({
         data:{
           post:post   // post varaible from Post.create() is passed on in Json obj

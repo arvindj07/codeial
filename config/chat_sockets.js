@@ -5,7 +5,7 @@ module.exports.chatSockets = function(socketServer){
   let io = require('socket.io')(socketServer, {
     cors: {                                     // NOTE: This is an extra bit that came up after searching for the error 
                                                 // in StackOverflow, as the connection wasnt established
-      origin: "http://52.90.135.234/:8000",
+      origin: "http://52.90.135.234:8000",
       // origin: "http://localhost:8000",
       methods: ["GET", "POST"],
       allowedHeaders: ["my-custom-header"],

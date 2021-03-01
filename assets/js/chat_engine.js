@@ -10,8 +10,8 @@ class ChatEngine{
     //to initiate the connection
     // the cdn file for socket ,at home.ejs in views gives us this object -'io'
     //this line fires an event-connect to establish connection
-    // this.socket=io.connect('http://localhost:5000'); // if we r running in our own local machine server
-    this.socket=io.connect('http://52.90.135.234:5000');  // if we r running on AWS cloud
+    this.socket=io.connect('http://localhost:5000'); // if we r running in our own local machine server
+    // this.socket=io.connect('http://52.90.135.234:5000');  // if we r running on AWS cloud
 
     if(this.userEmail){
       this.connectionHandler();

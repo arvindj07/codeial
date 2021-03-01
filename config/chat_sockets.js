@@ -6,10 +6,12 @@ module.exports.chatSockets = function(socketServer){
     cors: {                                     // NOTE: This is an extra bit that came up after searching for the error 
                                                 // in StackOverflow, as the connection wasnt established
       origin: "http://localhost:8000",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["my-custom-header"],
       credentials: true
     }
   });
-
+//is it unong now deploy? ok
   //This event is called 'connection' over here nd 'connect' at user/front-end side,But usually the event occurring over there and here has same name
   // here we r handling the event connect that has been triggered at user side and establish the connection
   io.sockets.on('connection',function(socket){

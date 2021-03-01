@@ -31,6 +31,7 @@ const customMiddleware = require('./config/middleware');
 const chatServer = require('http').Server(app);  // the 'app' in the arg is the one in line-3
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
+//yahan localhost aara hain isko rete url dena hain?
 console.log('Chat Server is listening on port 5000');
 const path=require('path');
 const morgan = require('morgan');
